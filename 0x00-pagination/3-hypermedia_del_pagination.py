@@ -38,20 +38,25 @@ class Server:
         """ HYPER INDEX """
         dataset_indexed = self.indexed_dataset()
         max = len(dataset_indexed)
-        
+
         assert index < max
-        
+
         data = []
         counter = 0
         next_index = 0
-                
+
         while counter != page_size:
             for key, value in dataset_indexed.items():
                 if (key >= index):
                     data.append(value)
-                    counter +=1 
+                    counter += 1
                 if (counter == page_size):
                     next_index = key + 1
                     break
-                
-        return {'index': index, 'data': data, 'page_size': page_size, 'next_index': next_index}
+
+        return {
+            'index': index,
+            'data': data,
+            'page_size': page_size,
+            'next_index': next_index
+        }
