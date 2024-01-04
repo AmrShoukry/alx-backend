@@ -16,7 +16,9 @@ class FIFOCache(BasicCache):
     def put(self, key, item):
         """ Put an item """
         cache = self.cache_data
-        if not (key is None or item is None or key in cache.keys()):
+        if (key in cache.keys()):
+            cache[key] = item
+        elif not (key is None or item is None):
             if len(self.cache_data) >= BasicCache.MAX_ITEMS:
                 first_key = sorted(self.priorities.items(),
                                    key=lambda item: item[1])[0][0]
