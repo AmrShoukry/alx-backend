@@ -19,17 +19,17 @@ class LIFOCache(BasicCache):
         if (key in cache.keys()):
             self.priorities[key] = self.counter
             self.counter += 1
-            print(self.priorities)
         elif not (key is None or item is None):
             if len(self.cache_data) >= BasicCache.MAX_ITEMS:
-                first_key = sorted(self.priorities.items(), key=lambda item: item[1], reverse=True)[0][0]
+                first_key = sorted(self.priorities.items(),
+                                   key=lambda item: item[1],
+                                   reverse=True)[0][0]
                 cache.pop(first_key)
                 self.priorities.pop(first_key)
                 print(f"DISCARD: {first_key}")
             cache[key] = item
             self.priorities[key] = self.counter
             self.counter += 1
-            print(self.priorities)
 
     def get(self, key):
         """ GET an item """
