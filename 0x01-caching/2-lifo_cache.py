@@ -16,10 +16,11 @@ class LIFOCache(BasicCache):
     def put(self, key, item):
         """ Put an item """
         cache = self.cache_data
-        if (key in cache.keys()):
+        if (key in cache.keys() and cache[key] != item):
             cache[key] = item
             self.priorities[key] = self.counter
             self.counter += 1
+
         elif not (key is None or item is None):
             if len(self.cache_data) >= BasicCache.MAX_ITEMS:
                 first_key = sorted(self.priorities.items(),
