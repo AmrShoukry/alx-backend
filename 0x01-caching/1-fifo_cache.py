@@ -19,7 +19,7 @@ class FIFOCache(BasicCache):
         if (key in cache.keys()):
             if cache[key] != item:
                 cache[key] = item
-        
+
         elif not (key is None or item is None):
             if len(self.cache_data) >= BasicCache.MAX_ITEMS:
                 first_key = sorted(self.priorities.items(),
