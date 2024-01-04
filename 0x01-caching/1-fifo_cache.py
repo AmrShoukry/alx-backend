@@ -11,19 +11,19 @@ class FIFOCache(BasicCache):
         """ Init method """
         super().__init__()
         self.counter = 0
-        self.orders = {}
+        self.priorities = {}
 
     def put(self, key, item):
         """ Put an item """
         cache = self.cache_data
         if not (key is None or item is None or key in cache.keys()):
             if len(self.cache_data) >= BasicCache.MAX_ITEMS:
-                first_key = list(dict(sorted(self.orders.items())).keys())[0]
+                first_key = sorted(self.priorities.items())[0][0]
                 cache.pop(first_key)
-                self.orders.pop(first_key)
+                self.priorities.pop(first_key)
                 print(f"DISCARD: {first_key}")
             cache[key] = item
-            self.orders[key] = self.counter
+            self.priorities[key] = self.counter
             self.counter += 1
 
     def get(self, key):
